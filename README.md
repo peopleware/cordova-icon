@@ -4,6 +4,8 @@
 
 Automatic icon resizing for Cordova. Create an icon in the root folder of your Cordova project and use cordova-icon-sharp to automatically resize and copy it for all the platforms your project supports (currenty works with iOS, Android, Windows 10 and OSX).
 
+This is a fork of [cordova-icon](https://github.com/AlexDisler/cordova-icon) that uses [sharp](http://sharp.dimens.io/) instead of ImageMagick.
+
 ### Installation
 
 ```bash
