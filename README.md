@@ -1,8 +1,8 @@
-# cordova-icon
+# cordova-icon-sharp
 
 <img src="cordova-icon-resize.png"/>
 
-Automatic icon resizing for Cordova. Create an icon in the root folder of your Cordova project and use cordova-icon to automatically resize and copy it for all the platforms your project supports (currenty works with iOS, Android, Windows 10 and OSX).
+Automatic icon resizing for Cordova. Create an icon in the root folder of your Cordova project and use cordova-icon-sharp to automatically resize and copy it for all the platforms your project supports (currenty works with iOS, Android, Windows 10 and OSX).
 
 ### Installation
 
@@ -11,7 +11,7 @@ $ sudo apt-get install imagemagick
 $ # on Mac: brew install imagemagick
 $ # on Windows: http://www.imagemagick.org/script/binary-releases.php#windows (check "Legacy tools")
 
-$ sudo npm install cordova-icon -g
+$ sudo npm install cordova-icon-sharp -g
 ```
 
 ### Requirements
@@ -27,15 +27,15 @@ You can provide a platform-specific icon by naming it `icon-[platform].png`
 (e.g `icon-android.png`, `icon-ios.png`).
 Then run:
 
-     $ cordova-icon
+     $ cordova-icon-sharp
 
 You also can specify manually a location for your `config.xml` or `icon.png`:
 
-     $ cordova-icon --config=config.xml --icon=icon.png
+     $ cordova-icon-sharp --config=config.xml --icon=icon.png
 
 If you run a old version of Cordova for iOS / Mac and you need your files in `/Resources/icons/`, use this option:
 
-     $ cordova-icon --xcode-old
+     $ cordova-icon-sharp --xcode-old
 
 For good results, your file should be:
 
@@ -50,20 +50,20 @@ For good results, your file should be:
 
 ### Creating a cordova-cli hook
 
-Since the execution of cordova-icon is pretty fast, you can add it as a cordova-cli hook to execute before every build.
+Since the execution of cordova-icon-sharp is pretty fast, you can add it as a cordova-cli hook to execute before every build.
 To create a new hook, go to your cordova project and run:
 
     $ mkdir hooks/after_prepare
-    $ vi hooks/after_prepare/cordova-icon.sh
+    $ vi hooks/after_prepare/cordova-icon-sharp.sh
 
 Paste the following into the hook script:
 
     #!/bin/bash
-    cordova-icon
+    cordova-icon-sharp
 
 Then give the script +x permission:
 
-    $ chmod +x hooks/after_prepare/cordova-icon.sh
+    $ chmod +x hooks/after_prepare/cordova-icon-sharp.sh
 
 That's it. Now every time you `cordova build`, the icons will be auto generated.
 
