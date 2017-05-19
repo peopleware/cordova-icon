@@ -1,7 +1,7 @@
 var fs     = require('fs-extra');
 var path   = require('path');
 var xml2js = require('xml2js');
-var ig     = require('imagemagick');
+var sharp  = require('sharp');
 var colors = require('colors');
 var _      = require('underscore');
 var Q      = require('q');
@@ -211,36 +211,26 @@ var generateIcon = function (platform, icon) {
   if (!fs.existsSync(dst)) {
     fs.mkdirsSync(dst);
   }
-  ig.resize({
-    srcPath: srcPath,
-    dstPath: dstPath,
-    quality: 1,
-    format: 'png',
-    width: icon.size,
-    height: icon.size
-  } , function(err, stdout, stderr){
-    if (err) {
-      deferred.reject(err);
-    } else {
-      deferred.resolve();
-      display.success(icon.name + ' created');
-    }
-  });
-  if (icon.height) {
-    ig.crop({
-      srcPath: srcPath,
-      dstPath: dstPath,
-      quality: 1,
-      format: 'png',
-      width: icon.size,
-      height: icon.height
-    } , function(err, stdout, stderr){
+  sharp(srcPath)
+    .resize(icon.size, icon.size)
+    .toFile(dstPath, function (err, info) {
       if (err) {
         deferred.reject(err);
       } else {
         deferred.resolve();
-        display.success(icon.name + ' cropped');
+        display.success(icon.name + ' created');
       }
+  });
+  if (icon.height) {
+    sharp(srcPath)
+      .resize(icon.size, icon.height)
+      .toFile(dstPath, function (err, info) {
+        if (err) {
+          deferred.reject(err);
+        } else {
+          deferred.resolve();
+          display.success(icon.name + ' cropped');
+        }
     });
   }
   return deferred.promise;
